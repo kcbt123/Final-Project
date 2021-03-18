@@ -38,6 +38,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\GUI\GUIElements\MainGroupController.cs" />
      <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
+     <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />
+     <Compile Include="Assets\Scripts\Utilities\LogUtils.cs" />
      <Compile Include="Assets\Scripts\Utilities\PredicateUtil.cs" />
      <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
