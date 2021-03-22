@@ -138,7 +138,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 125
+  controlID: 56
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -419,9 +419,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 363b0000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 86e2ffffd4e4ffffeaecffff76f8ffff5efbffff
+      m_SelectedIDs: 903b0000
+      m_LastClickedID: 15248
+      m_ExpandedIDs: 44e3ffff12eeffff58eeffff00f7ffff6af8ffff5efbffff423b0000543b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -571,9 +571,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -122.800766, y: 354.99875, z: -177.02045}
+    m_Target: {x: -550.96094, y: 307.15912, z: -290.25534}
     speed: 2
-    m_Value: {x: -122.800766, y: 354.99875, z: -177.02045}
+    m_Value: {x: -550.96094, y: 307.15912, z: -290.25534}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -623,9 +623,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 485.4654
+    m_Target: 461.4467
     speed: 2
-    m_Value: 485.4654
+    m_Value: 461.4467
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -689,20 +689,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Sprites/UI/Buttons
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Sprites/UI/Buttons
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ASUS\Desktop\Final Thesis\FinalProjectGit1\Final-Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 5}
-    m_SelectedIDs: 2e3b0000
-    m_LastClickedID: 15150
-    m_ExpandedIDs: 00000000243b0000303b0000323b0000ca3b000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: e23b0000
+    m_LastClickedID: 15330
+    m_ExpandedIDs: 00000000243b0000323b0000de3b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -875,4 +875,4 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 120
