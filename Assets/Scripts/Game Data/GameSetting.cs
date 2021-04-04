@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,6 @@ public class GameSetting : MonoBehaviour
             _isLog = value;
         }
     }
-    public const float DESIGN_HEIGHT = 1280;
-    public const float DESIGN_WIDTH = 720;
+    public const float DESIGN_HEIGHT = 800;
+    public const float DESIGN_WIDTH = 480;
 }
