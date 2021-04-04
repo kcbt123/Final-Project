@@ -27,6 +27,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
-        _rb.MovePosition(_rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
+
+        Vector2 distance = _movement * _moveSpeed * Time.fixedDeltaTime;
+        Vector2 movePosition = _rb.position + distance;
+
+        // if (Vector3.Distance(_rb.position, movePosition) <= 2f) {
+        //     _rb.MovePosition(_rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
+        // }
+
+        if (Mathf.Abs(_movement.x) == 1f) {
+            _rb.position = new Vector2(_movement.x, 0f);        
+        } 
+
+        if (Mathf.Abs(_movement.y) == 1f) {
+            _rb.position = new Vector2(0f, _movement.y);       
+        }
     }
 }
