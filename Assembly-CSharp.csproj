@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\GUI\GUIElements\MainGroupController.cs" />
      <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
      <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />
+     <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerGridMovement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />

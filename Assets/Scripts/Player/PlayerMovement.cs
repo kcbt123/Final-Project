@@ -23,7 +23,17 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Horizontal", _movement.x); 
         animator.SetFloat("Vertical", _movement.y); 
-        animator.SetFloat("Speed", _movement.sqrMagnitude); 
+        animator.SetFloat("Speed", _movement.sqrMagnitude);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space key was pressed.");
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Debug.Log("Space key was released.");
+        }
     }
 
     void FixedUpdate() {
