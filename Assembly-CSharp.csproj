@@ -45,6 +45,9 @@
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerGridMovement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Sections\BottomSection.cs" />
+     <Compile Include="Assets\Scripts\Sections\FunctionSection.cs" />
+     <Compile Include="Assets\Scripts\Sections\MainSection.cs" />
      <Compile Include="Assets\Scripts\Utilities\LogUtils.cs" />
      <Compile Include="Assets\Scripts\Utilities\PredicateUtil.cs" />
      <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMPro.cginc" />
