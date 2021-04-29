@@ -17,8 +17,8 @@ public class MainSection : MonoBehaviour
     //private List<CodeBlock> listCodeBlocks = new List<CodeBlock>(5);    // Start is called before the first frame update
     void Start()
     {
-        verticalLayoutGroup = transform.GetComponent<VerticalLayoutGroup>();
         scrollPanelObject = transform.GetChild(2).GetChild(0).GetChild(0).gameObject;
+        verticalLayoutGroup = scrollPanelObject.transform.GetComponent<VerticalLayoutGroup>();
         // Debug.Log("Object type 1" + transform.GetChild(2).gameObject.name);
         // Debug.Log("Object type 2" + transform.GetChild(2).GetChild(0).gameObject.name);
         // Debug.Log("Object type 3" + transform.GetChild(2).GetChild(0).GetChild(0).gameObject.name);
