@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class MainSection : MonoBehaviour
+public class MainSection : MonoBehaviour, IDropHandler
 {
+    public string GetClassName()
+    {
+        return this.GetType().Name;
+    }
+
+    /** ======= MARK: - Field and Properties ======= */
+
     [SerializeField]
     private GameObject codeBlockPrefab;
 
@@ -14,7 +22,23 @@ public class MainSection : MonoBehaviour
 
     private VerticalLayoutGroup verticalLayoutGroup;
 
-    //private List<CodeBlock> listCodeBlocks = new List<CodeBlock>(5);    // Start is called before the first frame update
+    //private List<CodeBlock> listCodeBlocks = new List<CodeBlock>(5);
+
+    private EventListener[] _eventListeners;
+
+    /** ======= MARK: - MonoBehaviour Methods ======= */
+
+    private void Awake()
+    {
+        AddListeners();
+    }
+
+    private void OnDestroy()
+    {
+        RemoveListeners();
+    }
+
+    // Start is called before the first frame update
     void Start()
     {
         scrollPanelObject = transform.GetChild(2).GetChild(0).GetChild(0).gameObject;
@@ -31,6 +55,8 @@ public class MainSection : MonoBehaviour
         {
             Debug.Log("Adding new code block");
             GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            int blockIndex = 9;
+            newCodeBlock.name = "Code Block" + blockIndex.ToString();
             newCodeBlock.transform.SetParent(scrollPanelObject.transform);
         } else if (Input.GetKeyDown(KeyCode.H))
         {
@@ -46,11 +72,64 @@ public class MainSection : MonoBehaviour
         }
     }
 
+    /** ======= MARK: - Handle Events ======= */
+
+    private void AddListeners()
+    {
+        _eventListeners = new EventListener[2];
+        _eventListeners[0] = CustomEventSystem.instance.AddListener(EventCode.ON_ADD_CODEBLOCK_MAIN, this, OnAddCodeBlock);
+        _eventListeners[1] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_CODEBLOCK_MAIN, this, OnRemoveCodeBlock);
+    }
+
+    private void RemoveListeners()
+    {
+        if (_eventListeners.Length != 0)
+        {
+            foreach (EventListener listener in _eventListeners)
+                CustomEventSystem.instance.RemoveListener(listener.eventCode, listener);
+        }
+    }
+
+    private void OnAddCodeBlock(object[] eventParam)
+    {
+        string codeBlockName = (string)eventParam[0];
+        string codeBlockType = (string)eventParam[1];
+
+        AddNewCodeBlock();
+    }
+
+    private void OnRemoveCodeBlock(object[] eventParam)
+    {
+
+    }
+
+    void AddNewCodeBlock() {
+        Debug.Log("Adding new main code block");
+        GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        int blockIndex = 9;
+        newCodeBlock.name = "Code Block" + blockIndex.ToString();
+        newCodeBlock.transform.SetParent(scrollPanelObject.transform);
+    }
+
     public void OnDeleteAllClick() {
         if (scrollPanelObject.transform.childCount > 0) {
             foreach (Transform child in scrollPanelObject.transform) {
                 Destroy(child.gameObject);
             }
+        }
+    }
+
+    // ===== MARK: - On Drop Handler
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log("OnDropMainSection");
+
+        if (eventData.pointerDrag != null) 
+        {
+            //eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            //AddNewCodeBlock();
+            Debug.Log("Nhan drop nhung minh se ko lay o day");
         }
     }
 }
