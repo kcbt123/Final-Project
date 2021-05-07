@@ -68,7 +68,6 @@ public class MainSection : MonoBehaviour, IDropHandler
             } else {
                 Debug.Log("No child left");
             }
-
         }
     }
 
@@ -95,20 +94,31 @@ public class MainSection : MonoBehaviour, IDropHandler
         string codeBlockName = (string)eventParam[0];
         string codeBlockType = (string)eventParam[1];
 
-        AddNewCodeBlock();
-    }
-
-    private void OnRemoveCodeBlock(object[] eventParam)
-    {
-
-    }
-
-    void AddNewCodeBlock() {
-        Debug.Log("Adding new main code block");
+        // Can them dung block code
+        Debug.Log("Adding new main code block to Main Section");
         GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         int blockIndex = 9;
         newCodeBlock.name = "Code Block" + blockIndex.ToString();
         newCodeBlock.transform.SetParent(scrollPanelObject.transform);
+    }
+
+    private void OnRemoveCodeBlock(object[] eventParam)
+    {
+        string codeBlockName = (string)eventParam[0];
+        string codeBlockType = (string)eventParam[1];
+
+        // Can remove dung block code o cho do
+        Transform trans = scrollPanelObject.transform;
+        if (trans.childCount > 0)
+        {
+            Debug.Log("Removing a code block from Main Section");
+            GameObject lastCodeBlock = trans.GetChild(trans.childCount - 1).gameObject;
+            Destroy(lastCodeBlock);
+        }
+        else
+        {
+            Debug.Log("No child left");
+        }
     }
 
     public void OnDeleteAllClick() {
@@ -119,16 +129,12 @@ public class MainSection : MonoBehaviour, IDropHandler
         }
     }
 
-    // ===== MARK: - On Drop Handler
-
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDropMainSection");
 
-        if (eventData.pointerDrag != null) 
+        if (eventData.pointerDrag != null)
         {
-            //eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            //AddNewCodeBlock();
             Debug.Log("Nhan drop nhung minh se ko lay o day");
         }
     }

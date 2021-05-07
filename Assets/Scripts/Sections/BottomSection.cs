@@ -6,19 +6,24 @@ using UnityEngine.UI;
 
 public class BottomSection : MonoBehaviour
 {
-
     /** ======= MARK: - Field and Properties ======= */
 
     private GameObject scrollPanelObject;
     private EventListener[] _eventListeners;
 
+    [SerializeField]
+    private GameObject codeItemPrefab;
+
     /** ======= MARK: - MonoBehaviour Methods ======= */
-
-
-
     void Awake()
     {
-        scrollPanelObject = transform.GetChild(0).GetChild(0).gameObject;
+        AddListeners();
+        scrollPanelObject = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+    }
+
+    private void OnDestroy()
+    {
+        RemoveListeners();
     }
 
     /** ======= MARK: - Handle Events ======= */
@@ -26,8 +31,8 @@ public class BottomSection : MonoBehaviour
     private void AddListeners()
     {
         _eventListeners = new EventListener[2];
-        _eventListeners[0] = CustomEventSystem.instance.AddListener(EventCode.ON_ADD_CODEBLOCK_BOTTOM, this, OnAddCodeItem);
-        _eventListeners[1] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_CODEBLOCK_BOTTOM, this, OnRemoveCodeItem);
+        _eventListeners[0] = CustomEventSystem.instance.AddListener(EventCode.ON_ADD_CODEBLOCK_MAIN, this, OnRemoveBottomCodeItem);
+        _eventListeners[1] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_CODEBLOCK_MAIN, this, OnAddBottomCodeItem);
     }
 
     private void RemoveListeners()
@@ -39,16 +44,35 @@ public class BottomSection : MonoBehaviour
         }
     }
 
-    private void OnAddCodeItem(object[] eventParam)
+    private void OnAddBottomCodeItem(object[] eventParam)
     {
         string codeBlockName = (string)eventParam[0];
         string codeBlockType = (string)eventParam[1];
 
-        //AddNewCodeItem();
+        // Can them dung code item tuong ung
+        Debug.Log("Adding new code item to bottom bar");
+        GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        int blockIndex = 1;
+        newCodeItem.name = "Code Item" + blockIndex.ToString();
+        newCodeItem.transform.SetParent(scrollPanelObject.transform);
     }
 
-    private void OnRemoveCodeItem(object[] eventParam)
+    private void OnRemoveBottomCodeItem(object[] eventParam)
     {
+        string codeBlockName = (string)eventParam[0];
+        string codeBlockType = (string)eventParam[1];
 
+        // Can bo dung block code tuong ung
+        Transform trans = scrollPanelObject.transform;
+        if (trans.childCount > 0)
+        {
+            Debug.Log("Removing a code item from bottom bar");
+            GameObject lastCodeBlock = trans.GetChild(trans.childCount - 1).gameObject;
+            Destroy(lastCodeBlock);
+        }
+        else
+        {
+            Debug.Log("No child left");
+        }
     }
 }
