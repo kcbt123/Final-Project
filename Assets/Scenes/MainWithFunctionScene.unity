@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 154844848}
   - component: {fileID: 154844850}
   - component: {fileID: 154844849}
+  - component: {fileID: 154844851}
   m_Layer: 5
   m_Name: Panning Bottom View
   m_TagString: Untagged
@@ -572,6 +573,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154844847}
   m_CullTransparentMesh: 0
+--- !u!114 &154844851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154844847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186fa049e6ac50648a0f863a677b13c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &235643140
 GameObject:
   m_ObjectHideFlags: 0
