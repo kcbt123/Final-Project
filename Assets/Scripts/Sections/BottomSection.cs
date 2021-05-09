@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class BottomSection : MonoBehaviour
 {
@@ -19,6 +20,33 @@ public class BottomSection : MonoBehaviour
     {
         AddListeners();
         scrollPanelObject = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+    }
+
+    private void Start()
+    {
+        AddMockCodeItems();
+    }
+
+    void AddMockCodeItems()
+    {
+        MovementBlockIdentifier[] idents = {
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.DOWN,
+            MovementBlockIdentifier.LEFT,
+            MovementBlockIdentifier.LEFT,
+            MovementBlockIdentifier.RIGHT,
+            MovementBlockIdentifier.RIGHT
+        };
+
+        for (int i = 0; i < idents.Length; i++)
+        {
+            GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            newCodeItem.name = "Test array generated item";
+            newCodeItem.transform.SetParent(scrollPanelObject.transform);
+            BlockJSONData data = newCodeItem.transform.GetComponent<CodeItemController>()._data;
+            data.blockType = BlockType.MOVEMENT;
+            data.blockIdentifier = idents[i];
+        }
     }
 
     private void OnDestroy()

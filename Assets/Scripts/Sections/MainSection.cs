@@ -53,7 +53,6 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     void AddTestCodeBlocks()
     {
-
         MovementBlockIdentifier[] idents = { 
             MovementBlockIdentifier.UP,
             MovementBlockIdentifier.DOWN,

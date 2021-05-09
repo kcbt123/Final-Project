@@ -4,29 +4,60 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CodeItemController : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CodeItemController : BlockBase, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private RectTransform rectTransform;
 
-    [SerializeField]
-    private Canvas canvas;
-    private CanvasGroup canvasGroup;
-
-    [SerializeField]
-    private GameObject codeItemPrefab;
-
-    private GameObject scrollPanelObject;
-
     private EventListener[] _eventListeners;
 
-    void Awake() {
+    private Image _codeItemIcon;
+
+    [SerializeField]
+    private Sprite iconMovUp;
+    [SerializeField]
+    private Sprite iconMovDown;
+    [SerializeField]
+    private Sprite iconMovLeft;
+    [SerializeField]
+    private Sprite iconMovRight;
+    [SerializeField]
+    private Sprite iconActionPlant;
+
+    void Awake()
+    {
         rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();   
+        canvasGroup = GetComponent<CanvasGroup>();
+        _codeItemIcon = transform.GetComponent<Image>();
     }
 
-    private void Start()
+    public override void Start()
     {
         //scrollPanelObject = transform.GetChild(2).GetChild(0).GetChild(0).gameObject;
+
+        SetupIcon();
+    }
+
+    void SetupIcon()
+    {
+        if (base._data.blockType == BlockType.MOVEMENT)
+        {
+            if (base._data.blockIdentifier == MovementBlockIdentifier.UP)
+            {
+                _codeItemIcon.sprite = iconMovUp;
+            }
+            else if (base._data.blockIdentifier == MovementBlockIdentifier.DOWN)
+            {
+                _codeItemIcon.sprite = iconMovDown;
+            }
+            else if (base._data.blockIdentifier == MovementBlockIdentifier.LEFT)
+            {
+                _codeItemIcon.sprite = iconMovLeft;
+            }
+            else if (base._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
+            {
+                _codeItemIcon.sprite = iconMovRight;
+            }
+        }
     }
 
     /** ======= MARK: - Handle Events ======= */
@@ -52,7 +83,7 @@ public class CodeItemController : MonoBehaviour, IPointerDownHandler, IBeginDrag
         string codeBlockName = (string)eventParam[0];
         string codeBlockType = (string)eventParam[1];
 
-        AddNewCodeItem();
+        //AddNewCodeItem();
     }
 
     private void OnRemoveCodeBlock(object[] eventParam)
@@ -95,12 +126,12 @@ public class CodeItemController : MonoBehaviour, IPointerDownHandler, IBeginDrag
         Debug.Log("OnPointerDown");
     }
 
-    void AddNewCodeItem()
-    {
-        Debug.Log("Adding new bottom code item");
-        GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        int blockIndex = 9;
-        newCodeItem.name = "Code Item" + blockIndex.ToString();
-        //newCodeItem.transform.SetParent(scrollPanelObject.transform);
-    }
+    //void AddNewCodeItem()
+    //{
+    //    Debug.Log("Adding new bottom code item");
+    //    GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+    //    int blockIndex = 9;
+    //    newCodeItem.name = "Code Item" + blockIndex.ToString();
+    //    //newCodeItem.transform.SetParent(scrollPanelObject.transform);
+    //}
 }

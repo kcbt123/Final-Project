@@ -8,7 +8,8 @@ public class BlockBase : MonoBehaviour
 
     /** ======= MARK: - Fields and Properties ======= */
 
-    /** [BlockJSONData] Used to draw public info about the code item / block
+    /** 
+     * [BlockJSONData] Used to draw public info about the code item / block
      *  Contains:
      *  - Base Item ID in the Bottom Section
      *  - Code Item / Block type
@@ -17,11 +18,10 @@ public class BlockBase : MonoBehaviour
     public BlockJSONData _data;
 
     /** [Canvas] which the block is currently in */
-    [SerializeField]
-    private Canvas canvas;
+    public Canvas canvas;
 
     /** [CanvasBlock] used to handle UI collision and alpha when dragging the block */
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
 
     /** ======= MARK: - MonoBehavior Functions ======= */
 
