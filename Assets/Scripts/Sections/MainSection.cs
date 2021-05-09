@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class MainSection : MonoBehaviour, IDropHandler
 {
@@ -46,6 +47,32 @@ public class MainSection : MonoBehaviour, IDropHandler
         // Debug.Log("Object type 1" + transform.GetChild(2).gameObject.name);
         // Debug.Log("Object type 2" + transform.GetChild(2).GetChild(0).gameObject.name);
         // Debug.Log("Object type 3" + transform.GetChild(2).GetChild(0).GetChild(0).gameObject.name);
+
+        //AddTestCodeBlocks();
+    }
+
+    void AddTestCodeBlocks()
+    {
+
+        MovementBlockIdentifier[] idents = { 
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.DOWN,
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.LEFT,
+            MovementBlockIdentifier.RIGHT,
+            MovementBlockIdentifier.RIGHT
+        };
+
+        for (int i = 0; i < idents.Length; i++)
+        {
+            GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            newCodeBlock.name = "Test array generated block";
+            newCodeBlock.transform.SetParent(scrollPanelObject.transform);
+            BlockJSONData data = newCodeBlock.transform.GetComponent<MovementBlockController>()._data;
+            data.blockType = BlockType.MOVEMENT;
+            data.blockIdentifier = idents[i];
+            newCodeBlock.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+        }
     }
 
     // Update is called once per frame

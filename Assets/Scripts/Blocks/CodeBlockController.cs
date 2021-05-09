@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class CodeBlockController : MonoBehaviour
+public class CodeBlockController : BlockBase
 {
     /** ======= MARK: - Fields and Properties ======= */
 
     private Button deleteButton;
+
+    public Image _codeBlockIcon;
+    public TextMeshProUGUI _textCodeBlock;
+
+    private int codeBlockID;
 
     private string _codeBlockName;
     private string _codeBlockType;
@@ -16,12 +22,13 @@ public class CodeBlockController : MonoBehaviour
 
     private void Awake()
     {
-
+        _codeBlockIcon = transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        _textCodeBlock = transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>();
     }
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame

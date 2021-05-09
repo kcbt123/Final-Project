@@ -64,9 +64,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Blocks\BlockBase.cs" />
+    <Compile Include="Assets\Scripts\Blocks\BlockJSONData.cs" />
     <Compile Include="Assets\Scripts\Blocks\CodeBlockController.cs" />
+    <Compile Include="Assets\Scripts\Blocks\CodeBlockIDs.cs" />
+    <Compile Include="Assets\Scripts\Blocks\CodeBlockType.cs" />
     <Compile Include="Assets\Scripts\Blocks\CodeItemController.cs" />
     <Compile Include="Assets\Scripts\Blocks\DropControllerMain.cs" />
+    <Compile Include="Assets\Scripts\Blocks\MovementBlockController.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIElements\MainGroupController.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
     <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />

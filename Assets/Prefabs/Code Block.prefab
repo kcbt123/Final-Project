@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3340457198919919446}
   - component: {fileID: 3340457198919919445}
-  - component: {fileID: 6947855754158344614}
+  - component: {fileID: 1607306173}
   m_Layer: 5
   m_Name: Code Block
   m_TagString: Untagged
@@ -258,7 +258,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3340457198919919447}
   m_CullTransparentMesh: 0
---- !u!114 &6947855754158344614
+--- !u!114 &1607306173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,9 +267,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3340457198919919447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d501ad3c58051745af45fab3ae2dd03, type: 3}
+  m_Script: {fileID: 11500000, guid: ffc9d53b5b1e05045a29ec20e34bc9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data:
+    itemID: 0
+    blockType: 0
+    blockIdentifier: 0
+  canvas: {fileID: 0}
+  _codeBlockIcon: {fileID: 0}
+  _textCodeBlock: {fileID: 0}
+  iconUp: {fileID: 21300000, guid: fdde8dc04adbd41b3b71b41c33701010, type: 3}
+  iconDown: {fileID: 21300000, guid: 8662f93ebce074dc189a9abe057bc8ba, type: 3}
+  iconLeft: {fileID: 21300000, guid: 4a9024434a35849d8957d279e74a299f, type: 3}
+  iconRight: {fileID: 21300000, guid: fa7c825401062498d9eccb68b3ca08dc, type: 3}
 --- !u!1 &3340457199248839035
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +757,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6947855754158344614}
+      - m_Target: {fileID: 0}
         m_MethodName: OnDeleteBlock
         m_Mode: 1
         m_Arguments:
