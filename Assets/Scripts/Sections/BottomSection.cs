@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class BottomSection : MonoBehaviour
 {
@@ -31,21 +32,40 @@ public class BottomSection : MonoBehaviour
     {
         MovementBlockIdentifier[] idents = {
             MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.DOWN,
-            MovementBlockIdentifier.LEFT,
+            MovementBlockIdentifier.UP,
             MovementBlockIdentifier.LEFT,
             MovementBlockIdentifier.RIGHT,
-            MovementBlockIdentifier.RIGHT
+            MovementBlockIdentifier.UP
         };
 
-        for (int i = 0; i < idents.Length; i++)
+        for (int i = 0; i < 10; i++)
         {
             GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             newCodeItem.name = "Test array generated item";
             newCodeItem.transform.SetParent(scrollPanelObject.transform);
             BlockJSONData data = newCodeItem.transform.GetComponent<CodeItemController>()._data;
+            data.itemID = i + 1;
+            newCodeItem.SetActive(false);
+        }
+
+        for (int i = 0; i < idents.Length; i++)
+        {
+            GameObject item = scrollPanelObject.transform.GetChild(i).gameObject;
+            BlockJSONData data = item.transform.GetComponent<CodeItemController>()._data;
             data.blockType = BlockType.MOVEMENT;
             data.blockIdentifier = idents[i];
+            item.SetActive(true);
+        }
+    }
+
+    void refreshIDs()
+    {
+        int itemCount = scrollPanelObject.transform.childCount;
+        for (int i = 0; i < itemCount; i++)
+        {
+            GameObject obj = scrollPanelObject.transform.GetChild(i).gameObject;
+            int trueIndex = obj.transform.GetSiblingIndex() + 1;
+            obj.GetComponent<CodeItemController>()._data.itemID = trueIndex;
         }
     }
 
@@ -74,33 +94,69 @@ public class BottomSection : MonoBehaviour
 
     private void OnAddBottomCodeItem(object[] eventParam)
     {
-        string codeBlockName = (string)eventParam[0];
-        string codeBlockType = (string)eventParam[1];
+        int _index = (int)eventParam[0];
+        BlockType _type = (BlockType)eventParam[1];
+        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
 
         // Can them dung code item tuong ung
-        Debug.Log("Adding new code item to bottom bar");
-        GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        int blockIndex = 1;
-        newCodeItem.name = "Code Item" + blockIndex.ToString();
-        newCodeItem.transform.SetParent(scrollPanelObject.transform);
+
+        //Lay index active moi nhat
+        int latestActiveIndex = -1;
+        for (int i = 0; i < scrollPanelObject.transform.childCount; i++)
+        {
+            if (scrollPanelObject.transform.GetChild(i).gameObject.activeSelf == false)
+            {
+                latestActiveIndex = i - 1;
+                break;
+            }
+        }
+
+        GameObject currentCodeItem = scrollPanelObject.transform.GetChild(latestActiveIndex + 1).gameObject;
+        currentCodeItem.SetActive(true);
+        currentCodeItem.SetActive(true);
+        BlockJSONData data = currentCodeItem.transform.GetComponent<CodeItemController>()._data;
+        data.blockType = _type;
+        data.blockIdentifier = _identifier;
+
+        refreshIDs();
     }
 
     private void OnRemoveBottomCodeItem(object[] eventParam)
     {
-        string codeBlockName = (string)eventParam[0];
-        string codeBlockType = (string)eventParam[1];
+        int _index = (int)eventParam[0];
+        BlockType _type = (BlockType)eventParam[1];
+        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
 
         // Can bo dung block code tuong ung
         Transform trans = scrollPanelObject.transform;
         if (trans.childCount > 0)
         {
-            Debug.Log("Removing a code item from bottom bar");
-            GameObject lastCodeBlock = trans.GetChild(trans.childCount - 1).gameObject;
-            Destroy(lastCodeBlock);
+            GameObject lastCodeBlock = trans.GetChild(_index - 1).gameObject;
+            lastCodeBlock.SetActive(false);
+
+            // Get all children
+            GameObject[] _array = new GameObject[trans.childCount];
+
+            for (int i = 0; i < trans.childCount; i++)
+            {
+                _array[i] = trans.GetChild(i).gameObject;
+            }
+
+            // Sort all remaining block
+            GameObject[] _sortedArray = _array.OrderByDescending(w => w.activeSelf).ToArray();
+
+            for (int i = 0; i < trans.childCount; i++)
+            {
+                _sortedArray[i].transform.SetSiblingIndex(i);
+            }
+
+            //Destroy(lastCodeBlock);
         }
         else
         {
             Debug.Log("No child left");
         }
+
+        refreshIDs();
     }
 }

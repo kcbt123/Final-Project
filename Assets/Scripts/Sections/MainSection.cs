@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Linq;
 
 public class MainSection : MonoBehaviour, IDropHandler
 {
@@ -49,6 +50,7 @@ public class MainSection : MonoBehaviour, IDropHandler
         // Debug.Log("Object type 3" + transform.GetChild(2).GetChild(0).GetChild(0).gameObject.name);
 
         //AddTestCodeBlocks();
+        AddPlaceholderCodeBlocks();
     }
 
     void AddTestCodeBlocks()
@@ -71,6 +73,17 @@ public class MainSection : MonoBehaviour, IDropHandler
             data.blockType = BlockType.MOVEMENT;
             data.blockIdentifier = idents[i];
             newCodeBlock.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+        }
+    }
+
+    void AddPlaceholderCodeBlocks()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            newCodeBlock.name = "Test array generated block";
+            newCodeBlock.transform.SetParent(scrollPanelObject.transform);
+            newCodeBlock.SetActive(false);
         }
     }
 
@@ -117,34 +130,67 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     private void OnAddCodeBlock(object[] eventParam)
     {
-        string codeBlockName = (string)eventParam[0];
-        string codeBlockType = (string)eventParam[1];
+        int _index = (int)eventParam[0];
+        BlockType _type = (BlockType)eventParam[1];
+        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
 
-        // Can them dung block code
-        Debug.Log("Adding new main code block to Main Section");
-        GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        int blockIndex = 9;
-        newCodeBlock.name = "Code Block" + blockIndex.ToString();
-        newCodeBlock.transform.SetParent(scrollPanelObject.transform);
+        //Lay index active moi nhat
+        int latestActiveIndex = -1;
+        for (int i = 0; i < scrollPanelObject.transform.childCount; i++)
+        {
+            if (scrollPanelObject.transform.GetChild(i).gameObject.activeSelf == false)
+            {
+              latestActiveIndex = i - 1;
+              break;
+            }
+        }
+
+        GameObject currentCodeBlock = scrollPanelObject.transform.GetChild(latestActiveIndex + 1).gameObject;
+        currentCodeBlock.SetActive(true);
+        BlockJSONData data = currentCodeBlock.transform.GetComponent<MovementBlockController>()._data;
+        data.blockType = _type;
+        data.blockIdentifier = _identifier;
+
+        currentCodeBlock.transform.GetComponent<MovementBlockController>().SetBlockData();
+
+        refreshIDs();
     }
 
     private void OnRemoveCodeBlock(object[] eventParam)
     {
-        string codeBlockName = (string)eventParam[0];
-        string codeBlockType = (string)eventParam[1];
+        int _index = (int)eventParam[0];
+        BlockType _type = (BlockType)eventParam[1];
+        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
 
         // Can remove dung block code o cho do
         Transform trans = scrollPanelObject.transform;
         if (trans.childCount > 0)
         {
-            Debug.Log("Removing a code block from Main Section");
-            GameObject lastCodeBlock = trans.GetChild(trans.childCount - 1).gameObject;
-            Destroy(lastCodeBlock);
+            GameObject lastCodeBlock = trans.GetChild(_index - 1).gameObject;
+            lastCodeBlock.SetActive(false);
+
+            // Get all children
+            GameObject[] _array = new GameObject[trans.childCount];
+
+            for (int i = 0; i < trans.childCount; i++)
+            {
+                _array[i] = trans.GetChild(i).gameObject;
+            }
+
+            // Sort all remaining block
+            GameObject[] _sortedArray = _array.OrderByDescending(w => w.activeSelf).ToArray();
+
+            for (int i = 0; i < trans.childCount; i++)
+            {
+                _sortedArray[i].transform.SetSiblingIndex(i);
+            }
         }
         else
         {
             Debug.Log("No child left");
         }
+
+        refreshIDs();
     }
 
     public void OnDeleteAllClick() {
@@ -162,6 +208,18 @@ public class MainSection : MonoBehaviour, IDropHandler
         if (eventData.pointerDrag != null)
         {
             Debug.Log("Nhan drop nhung minh se ko lay o day");
+        }
+    }
+
+    void refreshIDs()
+    {
+        int itemCount = scrollPanelObject.transform.childCount;
+        for (int i = 0; i < itemCount; i++)
+        {
+            GameObject obj = scrollPanelObject.transform.GetChild(i).gameObject;
+            int trueIndex = obj.transform.GetSiblingIndex() + 1;
+            obj.GetComponent<CodeBlockController>()._data.itemID = trueIndex;
+            obj.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = trueIndex.ToString();
         }
     }
 }

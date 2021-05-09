@@ -41,7 +41,10 @@ public class CodeBlockController : BlockBase
 
     public void OnDeleteBlock()
     {
-        Debug.Log("TEST REMOVE BLOCK BY BUTTON");
-        CustomEventSystem.instance.DispatchEvent(EventCode.ON_REMOVE_CODEBLOCK_MAIN, new object[] { _codeBlockName, _codeBlockType });
+        CustomEventSystem.instance.DispatchEvent(EventCode.ON_REMOVE_CODEBLOCK_MAIN, new object[] { 
+            _data.itemID,
+            _data.blockType, 
+            _data.blockIdentifier 
+        });
     }
 }

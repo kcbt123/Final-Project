@@ -19,14 +19,19 @@ public class MovementBlockController : CodeBlockController
     public override void Start()
     {
         base.Start();
+        SetBlockData();
+    }
 
+    public void SetBlockData()
+    {
         if (base._data.blockType == BlockType.MOVEMENT)
         {
             if (base._data.blockIdentifier == MovementBlockIdentifier.UP)
             {
                 _codeBlockIcon.sprite = iconUp;
                 _textCodeBlock.text = "man.moveUp()";
-            } else if (base._data.blockIdentifier == MovementBlockIdentifier.DOWN)
+            }
+            else if (base._data.blockIdentifier == MovementBlockIdentifier.DOWN)
             {
                 _codeBlockIcon.sprite = iconDown;
                 _textCodeBlock.text = "man.moveDown()";
