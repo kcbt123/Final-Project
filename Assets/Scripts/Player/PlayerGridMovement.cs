@@ -5,6 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class PlayerGridMovement : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _mainSectionObject;
+
+    private GameObject[] _codeBlocks;
+
+    private List<Vector3> _runDirectives;
+
 
     [SerializeField]
     private float moveSpeed = 5f;
@@ -69,8 +76,26 @@ public class PlayerGridMovement : MonoBehaviour
     IEnumerator MoveUpAfter(float x)
     {
         yield return new WaitForSeconds(x);
+        MoveUpSingle();
+        Debug.Log("Done moving up");
+    }
+    IEnumerator MoveDownAfter(float x)
+    {
+        yield return new WaitForSeconds(x);
+        MoveDownSingle();
+        Debug.Log("Done moving down");
+    }
+    IEnumerator MoveLeftAfter(float x)
+    {
+        yield return new WaitForSeconds(x);
         MoveLeftSingle();
-        Debug.Log("Done moving");
+        Debug.Log("Done moving left");
+    }
+    IEnumerator MoveRightAfter(float x)
+    {
+        yield return new WaitForSeconds(x);
+        MoveRightSingle();
+        Debug.Log("Done moving right");
     }
 
     /** ===== MARK: - Move By Code Functions ===== */
@@ -131,5 +156,54 @@ public class PlayerGridMovement : MonoBehaviour
         Debug.Log(string.Format("Current tile: [{0}, {1}]", movePoint.position.x, movePoint.position.y));
         var tilePos = flowerTilemap.WorldToCell(movePoint.position);
         flowerTilemap.SetTile(tilePos, replacementTile);
+    }
+
+    // Run code
+    public void RunCodeArray()
+    {
+        GetAllBlock();
+        AnalyzeCode();
+    }
+
+    void GetAllBlock()
+    {
+        GameObject containerObject = _mainSectionObject.transform.GetChild(2).GetChild(0).GetChild(0).gameObject;
+        _codeBlocks = new GameObject[containerObject.transform.childCount];
+
+        for (int i = 0; i < containerObject.transform.childCount; i++)
+        {
+            if (containerObject.transform.GetChild(i).gameObject.activeSelf == true)
+            {
+                _codeBlocks[i] = containerObject.transform.GetChild(i).gameObject;
+            }
+        }
+    }
+    void AnalyzeCode()
+    {
+        foreach (GameObject block in _codeBlocks)
+        {
+            if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
+            {
+                //StartCoroutine(MoveUpAfter(2f));
+                MoveUpSingle();
+            }
+            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
+            {
+                //StartCoroutine(MoveUpAfter(2f));
+                MoveDownSingle();
+            }
+            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
+            {
+                //StartCoroutine(MoveUpAfter(2f));
+                MoveLeftSingle();
+            }
+            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
+            {
+                //StartCoroutine(MoveUpAfter(2f));
+                MoveRightSingle();
+            }
+
+            //_runDirectives.Add(vec);
+        }
     }
 }
