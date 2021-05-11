@@ -161,31 +161,42 @@ public class PlayerGridMovement : MonoBehaviour
     // Run code
     public void RunCodeArray()
     {
-        //GetAllBlock();
-        //AnalyzeCode();
-
-        StartCoroutine(MoveTest());
+        GetAllBlock();
+        StartCoroutine(AnalyzeCode());
+        //StartCoroutine(MoveTest());
     }
 
     IEnumerator MoveTest()
     {
         yield return MoveUpCoroutine();
-        yield return new WaitForSeconds(1f);
+        
         yield return MoveUpCoroutine();
-        yield return new WaitForSeconds(1f);
+        
         yield return MoveRightCoroutine();
     }
 
     IEnumerator MoveUpCoroutine()
     {
         MoveUpSingle();
-        yield return null;
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator MoveDownCoroutine()
+    {
+        MoveDownSingle();
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator MoveLeftCoroutine()
+    {
+        MoveLeftSingle();
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator MoveRightCoroutine()
     {
         MoveRightSingle();
-        yield return null;
+        yield return new WaitForSeconds(1f);
     }
 
     void GetAllBlock()
@@ -201,29 +212,29 @@ public class PlayerGridMovement : MonoBehaviour
             }
         }
     }
-    void AnalyzeCode()
+    IEnumerator AnalyzeCode()
     {
         foreach (GameObject block in _codeBlocks)
         {
             if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
             {
                 //StartCoroutine(MoveUpAfter(1f));
-                MoveUpSingle();
+                yield return MoveUpCoroutine();
             }
             else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
             {
                 //StartCoroutine(MoveUpAfter(1f));
-                MoveDownSingle();
+                yield return MoveDownCoroutine();
             }
             else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
             {
                 //StartCoroutine(MoveUpAfter(1f));
-                MoveLeftSingle();
+                yield return MoveLeftCoroutine();
             }
             else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
             {
                 //StartCoroutine(MoveUpAfter(1f));
-                MoveRightSingle();
+                yield return MoveRightCoroutine();
             }
 
             //_runDirectives.Add(vec);
