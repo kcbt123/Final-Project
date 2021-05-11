@@ -161,8 +161,31 @@ public class PlayerGridMovement : MonoBehaviour
     // Run code
     public void RunCodeArray()
     {
-        GetAllBlock();
-        AnalyzeCode();
+        //GetAllBlock();
+        //AnalyzeCode();
+
+        StartCoroutine(MoveTest());
+    }
+
+    IEnumerator MoveTest()
+    {
+        yield return MoveUpCoroutine();
+        yield return new WaitForSeconds(1f);
+        yield return MoveUpCoroutine();
+        yield return new WaitForSeconds(1f);
+        yield return MoveRightCoroutine();
+    }
+
+    IEnumerator MoveUpCoroutine()
+    {
+        MoveUpSingle();
+        yield return null;
+    }
+
+    IEnumerator MoveRightCoroutine()
+    {
+        MoveRightSingle();
+        yield return null;
     }
 
     void GetAllBlock()
@@ -184,22 +207,22 @@ public class PlayerGridMovement : MonoBehaviour
         {
             if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
             {
-                //StartCoroutine(MoveUpAfter(2f));
+                //StartCoroutine(MoveUpAfter(1f));
                 MoveUpSingle();
             }
             else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
             {
-                //StartCoroutine(MoveUpAfter(2f));
+                //StartCoroutine(MoveUpAfter(1f));
                 MoveDownSingle();
             }
             else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
             {
-                //StartCoroutine(MoveUpAfter(2f));
+                //StartCoroutine(MoveUpAfter(1f));
                 MoveLeftSingle();
             }
             else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
             {
-                //StartCoroutine(MoveUpAfter(2f));
+                //StartCoroutine(MoveUpAfter(1f));
                 MoveRightSingle();
             }
 
