@@ -15,6 +15,13 @@ public enum MovementBlockIdentifier
     DOWN,
     LEFT,
     RIGHT,
+
+    WATERING,
+}
+
+public enum ActionBlockIdentifier
+{
+    WATERING,
 }
 
 

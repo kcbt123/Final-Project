@@ -16,6 +16,13 @@ public class BottomSection : MonoBehaviour
     [SerializeField]
     private GameObject codeItemPrefab;
 
+    MovementBlockIdentifier[] idents = {
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.RIGHT,
+            MovementBlockIdentifier.WATERING
+    };
+
     /** ======= MARK: - MonoBehaviour Methods ======= */
     void Awake()
     {
@@ -30,13 +37,6 @@ public class BottomSection : MonoBehaviour
 
     void AddMockCodeItems()
     {
-        MovementBlockIdentifier[] idents = {
-            MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.LEFT,
-            MovementBlockIdentifier.RIGHT,
-            MovementBlockIdentifier.UP
-        };
 
         for (int i = 0; i < 10; i++)
         {
@@ -78,9 +78,10 @@ public class BottomSection : MonoBehaviour
 
     private void AddListeners()
     {
-        _eventListeners = new EventListener[2];
+        _eventListeners = new EventListener[3];
         _eventListeners[0] = CustomEventSystem.instance.AddListener(EventCode.ON_ADD_CODEBLOCK_MAIN, this, OnRemoveBottomCodeItem);
         _eventListeners[1] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_CODEBLOCK_MAIN, this, OnAddBottomCodeItem);
+        _eventListeners[2] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_ALL_BLOCKS_MAIN, this, OnAddAllBottomItems);
     }
 
     private void RemoveListeners()
@@ -158,5 +159,16 @@ public class BottomSection : MonoBehaviour
         }
 
         refreshIDs();
+    }
+
+    private void OnAddAllBottomItems(object[] eventParam)
+    {
+        int _originalBlockCount = (int)eventParam[0];
+
+        Transform trans = scrollPanelObject.transform;
+        for (int i = 0; i < _originalBlockCount; i++)
+        {
+            trans.GetChild(i).gameObject.SetActive(true);
+        }
     }
 }

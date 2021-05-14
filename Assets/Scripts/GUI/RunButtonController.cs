@@ -56,7 +56,10 @@ public class RunButtonController : MonoBehaviour
             {
                 vec = new Vector2(1f, 0f);
             }
-
+            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+            {
+                vec = new Vector2(1f, 0f);
+            }
             _runDirectives.Add(vec);
         }
     }

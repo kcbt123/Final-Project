@@ -105,11 +105,9 @@ MonoBehaviour:
     blockType: 0
     blockIdentifier: 0
   canvas: {fileID: 0}
-  canvas: {fileID: 0}
-  codeItemPrefab: {fileID: 4002068893228557073}
-  _codeItemIcon: {fileID: 0}
+  canvasGroup: {fileID: 0}
   iconMovUp: {fileID: 21300000, guid: fdde8dc04adbd41b3b71b41c33701010, type: 3}
   iconMovDown: {fileID: 21300000, guid: 8662f93ebce074dc189a9abe057bc8ba, type: 3}
   iconMovLeft: {fileID: 21300000, guid: 4a9024434a35849d8957d279e74a299f, type: 3}
   iconMovRight: {fileID: 21300000, guid: fa7c825401062498d9eccb68b3ca08dc, type: 3}
-  iconActionPlant: {fileID: 21300000, guid: 85c42b513fb6148dfb81c3011e931afa, type: 3}
+  iconActionPlant: {fileID: 21300000, guid: 457ad70a83dc07b46831c66b876bee8b, type: 3}

@@ -237,7 +237,26 @@ public class PlayerGridMovement : MonoBehaviour
                 yield return MoveRightCoroutine();
             }
 
+            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+            {
+                //StartCoroutine(MoveUpAfter(1f));
+                yield return WaterPlantCoroutine();
+            }
+
             //_runDirectives.Add(vec);
         }
+    }
+
+    IEnumerator WaterPlantCoroutine()
+    {
+        WaterPlantSingle();
+        yield return new WaitForSeconds(1f);
+    }
+
+    void WaterPlantSingle()
+    {
+        Debug.Log(string.Format("Current tile: [{0}, {1}]", movePoint.position.x, movePoint.position.y));
+        var tilePos = flowerTilemap.WorldToCell(movePoint.position);
+        flowerTilemap.SetTile(tilePos, replacementTile);
     }
 }

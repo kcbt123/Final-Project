@@ -28,6 +28,15 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     private EventListener[] _eventListeners;
 
+    MovementBlockIdentifier[] idents = {
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.UP,
+            MovementBlockIdentifier.RIGHT,
+            MovementBlockIdentifier.WATERING
+    };
+
+    private int originalTotalBlockCount = 4;
+
     /** ======= MARK: - MonoBehaviour Methods ======= */
 
     private void Awake()
@@ -55,15 +64,6 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     void AddTestCodeBlocks()
     {
-        MovementBlockIdentifier[] idents = { 
-            MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.DOWN,
-            MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.LEFT,
-            MovementBlockIdentifier.RIGHT,
-            MovementBlockIdentifier.RIGHT
-        };
-
         for (int i = 0; i < idents.Length; i++)
         {
             GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -196,9 +196,18 @@ public class MainSection : MonoBehaviour, IDropHandler
     public void OnDeleteAllClick() {
         if (scrollPanelObject.transform.childCount > 0) {
             foreach (Transform child in scrollPanelObject.transform) {
-                Destroy(child.gameObject);
+                if (child.gameObject.activeSelf == true)
+                {
+                    child.gameObject.SetActive(false);
+                }        
             }
+
+            refreshIDs();
         }
+
+        CustomEventSystem.instance.DispatchEvent(EventCode.ON_REMOVE_ALL_BLOCKS_MAIN, new object[] {
+            originalTotalBlockCount,
+        });
     }
 
     public void OnDrop(PointerEventData eventData)

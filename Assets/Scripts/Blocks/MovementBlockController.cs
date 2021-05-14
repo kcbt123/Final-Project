@@ -14,6 +14,8 @@ public class MovementBlockController : CodeBlockController
     private Sprite iconLeft;
     [SerializeField]
     private Sprite iconRight;
+    [SerializeField]
+    private Sprite iconWatering;
 
     // Start is called before the first frame update
     public override void Start()
@@ -45,6 +47,11 @@ public class MovementBlockController : CodeBlockController
             {
                 _codeBlockIcon.sprite = iconRight;
                 _textCodeBlock.text = "man.moveRight()";
+            }
+            else if (base._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+            {
+                _codeBlockIcon.sprite = iconWatering;
+                _textCodeBlock.text = "man.water()";
             }
         }
     }

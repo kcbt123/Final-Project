@@ -57,6 +57,10 @@ public class CodeItemController : BlockBase, IPointerDownHandler, IBeginDragHand
             {
                 _codeItemIcon.sprite = iconMovRight;
             }
+            else if (base._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+            {
+                _codeItemIcon.sprite = iconActionPlant;
+            }
         }
     }
 
