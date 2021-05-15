@@ -12,7 +12,6 @@ public class PlayerGridMovement : MonoBehaviour
 
     private List<Vector3> _runDirectives;
 
-
     [SerializeField]
     private float moveSpeed = 5f;
 
@@ -162,7 +161,9 @@ public class PlayerGridMovement : MonoBehaviour
     public void RunCodeArray()
     {
         GetAllBlock();
-        StartCoroutine(AnalyzeCode());
+        //StartCoroutine(AnalyzeCode());
+        Debug.Log("Move completed");
+        CheckIfStageComplete();
         //StartCoroutine(MoveTest());
     }
 
@@ -216,35 +217,45 @@ public class PlayerGridMovement : MonoBehaviour
     {
         foreach (GameObject block in _codeBlocks)
         {
-            if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
+            if (block.activeSelf == true)
             {
-                //StartCoroutine(MoveUpAfter(1f));
-                yield return MoveUpCoroutine();
-            }
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
-            {
-                //StartCoroutine(MoveUpAfter(1f));
-                yield return MoveDownCoroutine();
-            }
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
-            {
-                //StartCoroutine(MoveUpAfter(1f));
-                yield return MoveLeftCoroutine();
-            }
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
-            {
-                //StartCoroutine(MoveUpAfter(1f));
-                yield return MoveRightCoroutine();
-            }
+                if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
+                {
+                    //StartCoroutine(MoveUpAfter(1f));
+                    yield return MoveUpCoroutine();
+                }
+                else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
+                {
+                    //StartCoroutine(MoveUpAfter(1f));
+                    yield return MoveDownCoroutine();
+                }
+                else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
+                {
+                    //StartCoroutine(MoveUpAfter(1f));
+                    yield return MoveLeftCoroutine();
+                }
+                else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
+                {
+                    //StartCoroutine(MoveUpAfter(1f));
+                    yield return MoveRightCoroutine();
+                }
 
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
-            {
-                //StartCoroutine(MoveUpAfter(1f));
-                yield return WaterPlantCoroutine();
+                else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+                {
+                    //StartCoroutine(MoveUpAfter(1f));
+                    yield return WaterPlantCoroutine();
+                }
             }
-
             //_runDirectives.Add(vec);
         }
+    }
+
+    void CheckIfStageComplete()
+    {
+        string timeSpent = "01:30";
+        CustomEventSystem.instance.DispatchEvent(EventCode.ON_STAGE_FINISHED, new object[] {
+            timeSpent
+        });
     }
 
     IEnumerator WaterPlantCoroutine()

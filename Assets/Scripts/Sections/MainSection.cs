@@ -46,7 +46,7 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     private void OnDestroy()
     {
-        RemoveListeners();
+        //RemoveListeners();
     }
 
     // Start is called before the first frame update

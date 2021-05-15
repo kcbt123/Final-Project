@@ -71,7 +71,7 @@ public class BottomSection : MonoBehaviour
 
     private void OnDestroy()
     {
-        RemoveListeners();
+        //RemoveListeners();
     }
 
     /** ======= MARK: - Handle Events ======= */

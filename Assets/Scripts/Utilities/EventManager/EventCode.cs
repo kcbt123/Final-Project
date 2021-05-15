@@ -9,4 +9,6 @@ public class EventCode
     public static string ON_REMOVE_ALL_BLOCKS_MAIN = "ON_REMOVE_ALL_BLOCKS_MAIN";
     public static string ON_ADD_CODEBLOCK_BOTTOM = "ON_ADD_CODEBLOCK_BOTTOM";
     public static string ON_REMOVE_CODEBLOCK_BOTTOM = "ON_REMOVE_CODEBLOCK_BOTTOM";
+
+    public static string ON_STAGE_FINISHED = "ON_STAGE_FINISHED";
 }
