@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Linq;
+using DG.Tweening;
 
 public class MainSection : MonoBehaviour, IDropHandler
 {
@@ -229,6 +230,26 @@ public class MainSection : MonoBehaviour, IDropHandler
             int trueIndex = obj.transform.GetSiblingIndex() + 1;
             obj.GetComponent<CodeBlockController>()._data.itemID = trueIndex;
             obj.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = trueIndex.ToString();
+        }
+    }
+
+    // MARK: - Test DOTWEEN HIDE MENU
+
+    [SerializeField]
+    private RectTransform _mainSection;
+
+    bool testFlag = true;
+
+    public void OnTapMainSectionHeader()
+    {
+        if (testFlag == true)
+        {
+            _mainSection.DOAnchorPos(new Vector2(180, 0), 0.25f);
+            testFlag = false;
+        } else if (testFlag == false)
+        {
+            _mainSection.DOAnchorPos(new Vector2(0, 0), 0.25f);
+            testFlag = true;
         }
     }
 }

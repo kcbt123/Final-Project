@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\GUI\GUIElements\MainGroupController.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIEndStage.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
+    <Compile Include="Assets\Scripts\GUI\RightSectionSwipeController.cs" />
     <Compile Include="Assets\Scripts\GUI\RunButtonController.cs" />
     <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />
     <Compile Include="Assets\Scripts\GridController.cs" />
@@ -86,6 +87,13 @@
     <Compile Include="Assets\Scripts\Sections\BottomSection.cs" />
     <Compile Include="Assets\Scripts\Sections\FunctionSection.cs" />
     <Compile Include="Assets\Scripts\Sections\MainSection.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModuleSprite.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Scripts\Utilities\EventManager\CustomEventSystem.cs" />
     <Compile Include="Assets\Scripts\Utilities\EventManager\EventCode.cs" />
     <Compile Include="Assets\Scripts\Utilities\EventManager\EventSystem.cs" />
@@ -97,6 +105,7 @@
     <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Scripts\Utilities\DOTween-0.0.3\readme.txt" />
     <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Fonts\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -294,6 +303,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>C:/Users/ASUS/Desktop/Final Thesis/FinalProjectGit1/Final-Project/Assets/Scripts/Utilities/DOTween-0.0.3/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
