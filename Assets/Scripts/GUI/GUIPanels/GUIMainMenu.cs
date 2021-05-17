@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GUIMainMenu : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GUIMainMenu : MonoBehaviour
 
     // ========== MARK: - Fields and Properties ==========
 
+    public RectTransform panelLevelSelect;
+
     // ========== MARK: - MonoBehaviour methods ==========
 
     protected void Awake()
@@ -25,7 +28,8 @@ public class GUIMainMenu : MonoBehaviour
 
     public void OnClickNewGame()
     {
-        SceneManager.LoadScene(1);
+
+        //SceneManager.LoadScene(1);
     }
 
     public void OnClickContinue()

@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class GameFlowManager : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip stageTheme;
     public string GetClassName()
     {
         return this.GetType().Name;
@@ -42,7 +44,8 @@ public class GameFlowManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        //AddListeners();
+        AddListeners();
+        audioSource.PlayOneShot(stageTheme);
     }
 
     private void OnDestroy()
@@ -71,6 +74,6 @@ public class GameFlowManager : MonoBehaviour
     private void OnStageFinished(object[] eventParam)
     {
         string timeFinished = (string)eventParam[0];
-
+        audioSource.Stop();
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GUIEndStage : MonoBehaviour
 {
+
+    public AudioClip victoryClip;
+    public AudioSource audioSource;
     public string GetClassName()
     {
         return this.GetType().Name;
@@ -45,5 +48,6 @@ public class GUIEndStage : MonoBehaviour
     protected void OnObjectiveCleared(object[] eventParam)
     {
         gameObject.SetActive(true);
+        audioSource.PlayOneShot(victoryClip);
     }
 }

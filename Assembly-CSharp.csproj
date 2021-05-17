@@ -73,8 +73,11 @@
     <Compile Include="Assets\Scripts\Blocks\DropControllerMain.cs" />
     <Compile Include="Assets\Scripts\Blocks\MovementBlockController.cs" />
     <Compile Include="Assets\Scripts\Blocks\WateringBlockController.cs" />
+    <Compile Include="Assets\Scripts\GUI\ButtonFX.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIElements\MainGroupController.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIManager.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIEndStage.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIPanels\GUILevelSelect.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
     <Compile Include="Assets\Scripts\GUI\RightSectionSwipeController.cs" />
     <Compile Include="Assets\Scripts\GUI\RunButtonController.cs" />
