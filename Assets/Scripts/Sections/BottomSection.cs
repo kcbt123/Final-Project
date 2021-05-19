@@ -18,7 +18,6 @@ public class BottomSection : MonoBehaviour
 
     MovementBlockIdentifier[] idents = {
             MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.UP,
             MovementBlockIdentifier.RIGHT,
             MovementBlockIdentifier.WATERING
     };

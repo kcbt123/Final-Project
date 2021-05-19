@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
     <Compile Include="Assets\Scripts\GUI\RightSectionSwipeController.cs" />
     <Compile Include="Assets\Scripts\GUI\RunButtonController.cs" />
+    <Compile Include="Assets\Scripts\GUI\Stage1GUIManager.cs" />
     <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />
     <Compile Include="Assets\Scripts\GridController.cs" />
     <Compile Include="Assets\Scripts\Manager\GameFlowManager.cs" />
