@@ -31,12 +31,11 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     MovementBlockIdentifier[] idents = {
             MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.UP,
             MovementBlockIdentifier.RIGHT,
             MovementBlockIdentifier.WATERING
     };
 
-    private int originalTotalBlockCount = 4;
+    private int originalTotalBlockCount = 3;
 
     /** ======= MARK: - MonoBehaviour Methods ======= */
 
