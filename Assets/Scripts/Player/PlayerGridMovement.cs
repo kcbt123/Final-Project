@@ -161,9 +161,9 @@ public class PlayerGridMovement : MonoBehaviour
     public void RunCodeArray()
     {
         GetAllBlock();
-        //StartCoroutine(AnalyzeCode());
-        Debug.Log("Move completed");
-        CheckIfStageComplete();
+        StartCoroutine(AnalyzeCode());
+        //Debug.Log("Move completed");
+        //CheckIfStageComplete();
         //StartCoroutine(MoveTest());
     }
 
@@ -215,11 +215,58 @@ public class PlayerGridMovement : MonoBehaviour
     }
     IEnumerator AnalyzeCode()
     {
+        int iterator = 0;
         foreach (GameObject block in _codeBlocks)
         {
+            Debug.Log("Test iterator" + iterator);
             if (block.activeSelf == true)
             {
-                if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
+                if (block.GetComponent<ForCodeBlockController>() != null)
+                {
+                    if (block.GetComponent<ForCodeBlockController>()._data.blockIdentifier == MovementBlockIdentifier.FOR)
+                    {
+                        Debug.Log("Vao roi");
+                        ForCodeBlockController controller = block.GetComponent<ForCodeBlockController>();
+                        for (int i = 0; i < controller.loopCount; i++)
+                        {
+                            for (int j = 0; j < block.transform.GetChild(0).childCount; j++)
+                            {
+                                GameObject childBlock = block.transform.GetChild(0).GetChild(j).gameObject;
+                                if (childBlock.activeSelf == true)
+                                {
+                                    if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveUpCoroutine();
+                                    }
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveDownCoroutine();
+                                    }
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveLeftCoroutine();
+                                    }
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveRightCoroutine();
+                                    }
+
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return WaterPlantCoroutine();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
                 {
                     //StartCoroutine(MoveUpAfter(1f));
                     yield return MoveUpCoroutine();
@@ -245,8 +292,11 @@ public class PlayerGridMovement : MonoBehaviour
                     //StartCoroutine(MoveUpAfter(1f));
                     yield return WaterPlantCoroutine();
                 }
+                
+                
             }
             //_runDirectives.Add(vec);
+            iterator++;
         }
     }
 

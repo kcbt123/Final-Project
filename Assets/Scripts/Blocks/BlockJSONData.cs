@@ -17,6 +17,8 @@ public enum MovementBlockIdentifier
     RIGHT,
 
     WATERING,
+    FOR,
+    IF,
 }
 
 public enum ActionBlockIdentifier

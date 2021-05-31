@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Blocks\CodeBlockType.cs" />
     <Compile Include="Assets\Scripts\Blocks\CodeItemController.cs" />
     <Compile Include="Assets\Scripts\Blocks\DropControllerMain.cs" />
+    <Compile Include="Assets\Scripts\Blocks\ForCodeBlockController.cs" />
     <Compile Include="Assets\Scripts\Blocks\MovementBlockController.cs" />
     <Compile Include="Assets\Scripts\Blocks\WateringBlockController.cs" />
     <Compile Include="Assets\Scripts\GUI\ButtonFX.cs" />
