@@ -479,12 +479,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   canvasGroup: {fileID: 0}
   targetedCondition: 0
-  normalFlowerImage: {fileID: 1432150686909951681, guid: 273af09b26823a84b960f2e0c763d71a,
-    type: 3}
-  redFlowerImage: {fileID: -5275595805844675749, guid: 273af09b26823a84b960f2e0c763d71a,
-    type: 3}
-  yellowFlowerImage: {fileID: -8215688131708588722, guid: 273af09b26823a84b960f2e0c763d71a,
-    type: 3}
+  yellowFlower: {fileID: 21300000, guid: af982d8b4ccc6984188a46ea7ff6d567, type: 3}
+  whiteFlower: {fileID: 21300000, guid: 596096f203850f84f93f408aae5ed1d7, type: 3}
+  redFlower: {fileID: 21300000, guid: 592aa5519a3f49b4e85bfa260f88a4d1, type: 3}
   childBlock1: {fileID: 201775637086265277}
   childBlock2: {fileID: 2594791413595130580}
 --- !u!1 &201775635489154359
@@ -1041,8 +1038,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.6, y: -0.0000015495}
-  m_SizeDelta: {x: 21.277374, y: 21.112488}
+  m_AnchoredPosition: {x: 44.18, y: -0.08}
+  m_SizeDelta: {x: 24.437042, y: 20.946198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &201775636307671048
 CanvasRenderer:
@@ -1071,7 +1068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: af982d8b4ccc6984188a46ea7ff6d567, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 592aa5519a3f49b4e85bfa260f88a4d1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -11,11 +11,11 @@ public class IfCodeBlockController : BlockBase
     public int targetedCondition;
 
     [SerializeField]
-    private Sprite normalFlowerImage;
+    private Sprite yellowFlower;
     [SerializeField]
-    private Sprite redFlowerImage;
+    private Sprite whiteFlower;
     [SerializeField]
-    private Sprite yellowFlowerImage;
+    private Sprite redFlower;
 
     [SerializeField]
     private GameObject childBlock1;
@@ -26,13 +26,13 @@ public class IfCodeBlockController : BlockBase
     {
         if (targetedCondition == 0)
         {
-            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = normalFlowerImage;
+            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = yellowFlower;
         } else if (targetedCondition == 1)
         {
-            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = redFlowerImage;
+            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = whiteFlower;
         } else if (targetedCondition == 2)
         {
-            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = yellowFlowerImage;
+            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = redFlower;
         }
     }
 }
