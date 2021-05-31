@@ -27,6 +27,17 @@ public class PlayerGridMovement : MonoBehaviour
     [SerializeField]
     private Tile replacementTile;
 
+    // Condition Tiles
+
+    [SerializeField]
+    private Tile conditionTile1;
+
+    [SerializeField]
+    private Tile conditionTile2;
+
+    [SerializeField]
+    private Tile conditionTile3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -225,7 +236,7 @@ public class PlayerGridMovement : MonoBehaviour
                 {
                     if (block.GetComponent<ForCodeBlockController>()._data.blockIdentifier == MovementBlockIdentifier.FOR)
                     {
-                        Debug.Log("Vao roi");
+                        Debug.Log("Vao block for roi");
                         ForCodeBlockController controller = block.GetComponent<ForCodeBlockController>();
                         for (int i = 0; i < controller.loopCount; i++)
                         {
@@ -265,6 +276,67 @@ public class PlayerGridMovement : MonoBehaviour
                         }
                     }
                 }
+
+                else if (block.GetComponent<IfCodeBlockController>() != null)
+                {
+                    if (block.GetComponent<IfCodeBlockController>()._data.blockIdentifier == MovementBlockIdentifier.IF)
+                    {
+                        IfCodeBlockController controller = block.GetComponent<IfCodeBlockController>();
+                        var currentTilePos = flowerTilemap.WorldToCell(movePoint.position);
+
+                        int currentTileChoiceID = 0;
+
+                        if (flowerTilemap.GetTile(currentTilePos) == conditionTile1)
+                        {
+                            currentTileChoiceID = 0;
+                        } else if (flowerTilemap.GetTile(currentTilePos) == conditionTile2)
+                        {
+                            currentTileChoiceID = 1;
+                        } else if (flowerTilemap.GetTile(currentTilePos) == conditionTile3)
+                        {
+                            currentTileChoiceID = 2;
+                        }
+
+                        // Dung DK moi vao, ko thi thoi
+                        if (currentTileChoiceID == controller.targetedCondition)
+                        {
+                            for (int j = 0; j < block.transform.GetChild(0).childCount; j++)
+                            {
+                                GameObject childBlock = block.transform.GetChild(0).GetChild(j).gameObject;
+                                if (childBlock.activeSelf == true)
+                                {
+                                    if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveUpCoroutine();
+                                    }
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveDownCoroutine();
+                                    }
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveLeftCoroutine();
+                                    }
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return MoveRightCoroutine();
+                                    }
+
+                                    else if (childBlock.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
+                                    {
+                                        //StartCoroutine(MoveUpAfter(1f));
+                                        yield return WaterPlantCoroutine();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
 
                 else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
                 {

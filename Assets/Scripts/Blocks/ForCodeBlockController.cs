@@ -20,7 +20,6 @@ public class ForCodeBlockController : BlockBase
     private void Awake()
     {
         loopCountText = transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
-
     }
 
     public void IncreaseLoopCounter()
