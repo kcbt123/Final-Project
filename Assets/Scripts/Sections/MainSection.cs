@@ -236,7 +236,10 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     [SerializeField]
     private RectTransform _mainSection;
-
+    [SerializeField]
+    private RectTransform _backgroundGrid;
+    [SerializeField]
+    private RectTransform _playerAvatar;
     bool testFlag = true;
 
     public void OnTapMainSectionHeader()
@@ -244,10 +247,14 @@ public class MainSection : MonoBehaviour, IDropHandler
         if (testFlag == true)
         {
             _mainSection.DOAnchorPos(new Vector2(180, 0), 0.25f);
+            _backgroundGrid.DOAnchorPos(new Vector2(5.03f, 5.14f), 0.25f);
+            _playerAvatar.DOAnchorPos(new Vector2(-0.512f, -2.227f), 0.25f);
             testFlag = false;
         } else if (testFlag == false)
         {
             _mainSection.DOAnchorPos(new Vector2(0, 0), 0.25f);
+            _backgroundGrid.DOAnchorPos(new Vector2(3.03f, 5.14f), 0.25f);
+            _playerAvatar.DOAnchorPos(new Vector2(-2.512f, -2.227f), 0.25f);
             testFlag = true;
         }
     }

@@ -26,13 +26,13 @@ public class IfCodeBlockController : BlockBase
     {
         if (targetedCondition == 0)
         {
-            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = yellowFlower;
+            transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = yellowFlower;
         } else if (targetedCondition == 1)
         {
-            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = whiteFlower;
+            transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = whiteFlower;
         } else if (targetedCondition == 2)
         {
-            transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = redFlower;
+            transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = redFlower;
         }
     }
 }
