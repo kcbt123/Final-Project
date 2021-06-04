@@ -29,10 +29,10 @@ public class MainSection : MonoBehaviour, IDropHandler
 
     private EventListener[] _eventListeners;
 
-    MovementBlockIdentifier[] idents = {
-            MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.RIGHT,
-            MovementBlockIdentifier.WATERING
+    BlockItemIdentifier[] idents = {
+            BlockItemIdentifier.MOVEMENT_UP,
+            BlockItemIdentifier.MOVEMENT_RIGHT,
+            BlockItemIdentifier.ACTION_WATERING_YELLOW
     };
 
     private int originalTotalBlockCount = 3;
@@ -59,7 +59,7 @@ public class MainSection : MonoBehaviour, IDropHandler
         // Debug.Log("Object type 3" + transform.GetChild(2).GetChild(0).GetChild(0).gameObject.name);
 
         //AddTestCodeBlocks();
-        AddPlaceholderCodeBlocks();
+        //AddPlaceholderCodeBlocks();
     }
 
     void AddTestCodeBlocks()
@@ -69,8 +69,8 @@ public class MainSection : MonoBehaviour, IDropHandler
             GameObject newCodeBlock = Instantiate(codeBlockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             newCodeBlock.name = "Test array generated block";
             newCodeBlock.transform.SetParent(scrollPanelObject.transform);
-            BlockJSONData data = newCodeBlock.transform.GetComponent<MovementBlockController>()._data;
-            data.blockType = BlockType.MOVEMENT;
+            BlockData data = newCodeBlock.transform.GetComponent<MovementBlockController>().data;
+            data.blockType = BlockItemType.MOVEMENT;
             data.blockIdentifier = idents[i];
             newCodeBlock.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
         }
@@ -131,8 +131,8 @@ public class MainSection : MonoBehaviour, IDropHandler
     private void OnAddCodeBlock(object[] eventParam)
     {
         int _index = (int)eventParam[0];
-        BlockType _type = (BlockType)eventParam[1];
-        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
+        BlockItemType _type = (BlockItemType)eventParam[1];
+        BlockItemIdentifier _identifier = (BlockItemIdentifier)eventParam[2];
 
         //Lay index active moi nhat
         int latestActiveIndex = -1;
@@ -147,7 +147,7 @@ public class MainSection : MonoBehaviour, IDropHandler
 
         GameObject currentCodeBlock = scrollPanelObject.transform.GetChild(latestActiveIndex + 1).gameObject;
         currentCodeBlock.SetActive(true);
-        BlockJSONData data = currentCodeBlock.transform.GetComponent<MovementBlockController>()._data;
+        BlockData data = currentCodeBlock.transform.GetComponent<MovementBlockController>().data;
         data.blockType = _type;
         data.blockIdentifier = _identifier;
 
@@ -159,8 +159,8 @@ public class MainSection : MonoBehaviour, IDropHandler
     private void OnRemoveCodeBlock(object[] eventParam)
     {
         int _index = (int)eventParam[0];
-        BlockType _type = (BlockType)eventParam[1];
-        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
+        BlockItemType _type = (BlockItemType)eventParam[1];
+        BlockItemIdentifier _identifier = (BlockItemIdentifier)eventParam[2];
 
         // Can remove dung block code o cho do
         Transform trans = scrollPanelObject.transform;
@@ -227,7 +227,7 @@ public class MainSection : MonoBehaviour, IDropHandler
         {
             GameObject obj = scrollPanelObject.transform.GetChild(i).gameObject;
             int trueIndex = obj.transform.GetSiblingIndex() + 1;
-            obj.GetComponent<CodeBlockController>()._data.itemID = trueIndex;
+            obj.GetComponent<MovementBlockController>().data.itemCurrentIndex = trueIndex;
             obj.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = trueIndex.ToString();
         }
     }
@@ -247,13 +247,13 @@ public class MainSection : MonoBehaviour, IDropHandler
         if (testFlag == true)
         {
             _mainSection.DOAnchorPos(new Vector2(180, 0), 0.25f);
-            _backgroundGrid.DOAnchorPos(new Vector2(5.03f, 5.14f), 0.25f);
+            _backgroundGrid.DOAnchorPos(new Vector2(5.03f, 5.14f), 0.4f);
             _playerAvatar.DOAnchorPos(new Vector2(-0.512f, -2.227f), 0.25f);
             testFlag = false;
         } else if (testFlag == false)
         {
             _mainSection.DOAnchorPos(new Vector2(0, 0), 0.25f);
-            _backgroundGrid.DOAnchorPos(new Vector2(3.03f, 5.14f), 0.25f);
+            _backgroundGrid.DOAnchorPos(new Vector2(3.03f, 5.14f), 0.4f);
             _playerAvatar.DOAnchorPos(new Vector2(-2.512f, -2.227f), 0.25f);
             testFlag = true;
         }

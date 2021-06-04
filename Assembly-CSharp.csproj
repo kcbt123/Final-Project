@@ -64,17 +64,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Blocks\BlockBase.cs" />
-    <Compile Include="Assets\Scripts\Blocks\BlockJSONData.cs" />
-    <Compile Include="Assets\Scripts\Blocks\CodeBlockController.cs" />
-    <Compile Include="Assets\Scripts\Blocks\CodeBlockIDs.cs" />
-    <Compile Include="Assets\Scripts\Blocks\CodeBlockType.cs" />
-    <Compile Include="Assets\Scripts\Blocks\CodeItemController.cs" />
-    <Compile Include="Assets\Scripts\Blocks\DropControllerMain.cs" />
-    <Compile Include="Assets\Scripts\Blocks\ForCodeBlockController.cs" />
-    <Compile Include="Assets\Scripts\Blocks\IfCodeBlockController.cs" />
-    <Compile Include="Assets\Scripts\Blocks\MovementBlockController.cs" />
-    <Compile Include="Assets\Scripts\Blocks\WateringBlockController.cs" />
     <Compile Include="Assets\Scripts\GUI\ButtonFX.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIElements\MainGroupController.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIManager.cs" />
@@ -87,12 +76,20 @@
     <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />
     <Compile Include="Assets\Scripts\GridController.cs" />
     <Compile Include="Assets\Scripts\Manager\GameFlowManager.cs" />
+    <Compile Include="Assets\Scripts\Objects\Base\BlockData.cs" />
+    <Compile Include="Assets\Scripts\Objects\Base\BlockItemBase.cs" />
+    <Compile Include="Assets\Scripts\Objects\Base\BlockItemType.cs" />
+    <Compile Include="Assets\Scripts\Objects\Blocks\ActionBlocks\WateringBlockController.cs" />
+    <Compile Include="Assets\Scripts\Objects\Blocks\MovementBlocks\MovementBlockController.cs" />
+    <Compile Include="Assets\Scripts\Objects\Blocks\SpecialBlocks\ForCodeBlockController.cs" />
+    <Compile Include="Assets\Scripts\Objects\Blocks\SpecialBlocks\IfCodeBlockController.cs" />
+    <Compile Include="Assets\Scripts\Objects\Items\CodeItemController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGridMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Sections\BottomSection.cs" />
-    <Compile Include="Assets\Scripts\Sections\FunctionSection.cs" />
-    <Compile Include="Assets\Scripts\Sections\MainSection.cs" />
+    <Compile Include="Assets\Scripts\Sections\BlockSections\FunctionSection.cs" />
+    <Compile Include="Assets\Scripts\Sections\BlockSections\MainSection.cs" />
+    <Compile Include="Assets\Scripts\Sections\ItemSections\BottomSection.cs" />
     <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Scripts\Utilities\DOTween-0.0.3\Modules\DOTweenModulePhysics2D.cs" />

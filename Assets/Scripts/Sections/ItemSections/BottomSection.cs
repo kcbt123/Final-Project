@@ -16,10 +16,10 @@ public class BottomSection : MonoBehaviour
     [SerializeField]
     private GameObject codeItemPrefab;
 
-    MovementBlockIdentifier[] idents = {
-            MovementBlockIdentifier.UP,
-            MovementBlockIdentifier.RIGHT,
-            MovementBlockIdentifier.WATERING
+    BlockItemIdentifier[] idents = {
+            BlockItemIdentifier.MOVEMENT_UP,
+            BlockItemIdentifier.MOVEMENT_RIGHT,
+            BlockItemIdentifier.ACTION_WATERING_YELLOW,
     };
 
     /** ======= MARK: - MonoBehaviour Methods ======= */
@@ -42,16 +42,34 @@ public class BottomSection : MonoBehaviour
             GameObject newCodeItem = Instantiate(codeItemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             newCodeItem.name = "Test array generated item";
             newCodeItem.transform.SetParent(scrollPanelObject.transform);
-            BlockJSONData data = newCodeItem.transform.GetComponent<CodeItemController>()._data;
-            data.itemID = i + 1;
+            BlockData data = newCodeItem.transform.GetComponent<CodeItemController>().data;
+            data.itemCurrentIndex = i + 1;
             newCodeItem.SetActive(false);
         }
 
         for (int i = 0; i < idents.Length; i++)
         {
             GameObject item = scrollPanelObject.transform.GetChild(i).gameObject;
-            BlockJSONData data = item.transform.GetComponent<CodeItemController>()._data;
-            data.blockType = BlockType.MOVEMENT;
+            BlockData data = item.transform.GetComponent<CodeItemController>().data;
+
+            if (idents[i] == BlockItemIdentifier.MOVEMENT_UP
+                || idents[i] == BlockItemIdentifier.MOVEMENT_DOWN
+                || idents[i] == BlockItemIdentifier.MOVEMENT_LEFT
+                || idents[i] == BlockItemIdentifier.MOVEMENT_RIGHT)
+            {
+                data.blockType = BlockItemType.MOVEMENT;
+            }
+            else if (idents[i] == BlockItemIdentifier.ACTION_WATERING_YELLOW
+              || idents[i] == BlockItemIdentifier.ACTION_WATERING_WHITE
+              || idents[i] == BlockItemIdentifier.ACTION_WATERING_RED)
+            {
+                data.blockType = BlockItemType.ACTION;
+            } else if (idents[i] == BlockItemIdentifier.SPECIAL_FOR 
+                || idents[i] == BlockItemIdentifier.SPECIAL_IF)
+            {
+                data.blockType = BlockItemType.SPECIAL;
+            }
+
             data.blockIdentifier = idents[i];
             item.SetActive(true);
         }
@@ -64,7 +82,7 @@ public class BottomSection : MonoBehaviour
         {
             GameObject obj = scrollPanelObject.transform.GetChild(i).gameObject;
             int trueIndex = obj.transform.GetSiblingIndex() + 1;
-            obj.GetComponent<CodeItemController>()._data.itemID = trueIndex;
+            obj.GetComponent<CodeItemController>().data.itemCurrentIndex = trueIndex;
         }
     }
 
@@ -95,8 +113,8 @@ public class BottomSection : MonoBehaviour
     private void OnAddBottomCodeItem(object[] eventParam)
     {
         int _index = (int)eventParam[0];
-        BlockType _type = (BlockType)eventParam[1];
-        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
+        BlockItemType _type = (BlockItemType)eventParam[1];
+        BlockItemIdentifier _identifier = (BlockItemIdentifier)eventParam[2];
 
         // Can them dung code item tuong ung
 
@@ -114,7 +132,7 @@ public class BottomSection : MonoBehaviour
         GameObject currentCodeItem = scrollPanelObject.transform.GetChild(latestActiveIndex + 1).gameObject;
         currentCodeItem.SetActive(true);
         currentCodeItem.SetActive(true);
-        BlockJSONData data = currentCodeItem.transform.GetComponent<CodeItemController>()._data;
+        BlockData data = currentCodeItem.transform.GetComponent<CodeItemController>().data;
         data.blockType = _type;
         data.blockIdentifier = _identifier;
 
@@ -124,8 +142,8 @@ public class BottomSection : MonoBehaviour
     private void OnRemoveBottomCodeItem(object[] eventParam)
     {
         int _index = (int)eventParam[0];
-        BlockType _type = (BlockType)eventParam[1];
-        MovementBlockIdentifier _identifier = (MovementBlockIdentifier)eventParam[2];
+        BlockItemType _type = (BlockItemType)eventParam[1];
+        BlockItemIdentifier _identifier = (BlockItemIdentifier)eventParam[2];
 
         // Can bo dung block code tuong ung
         Transform trans = scrollPanelObject.transform;

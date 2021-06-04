@@ -26,47 +26,4 @@ public class RunButtonController : MonoBehaviour
     {
         
     }
-
-    void GetAllBlock()
-    {
-        _codeBlocks = new GameObject[_mainSectionObject.transform.childCount];
-
-        for (int i = 0; i < _mainSectionObject.transform.childCount; i++)
-        {
-            _codeBlocks[i] = _mainSectionObject.transform.GetChild(i).gameObject;
-        }
-    }
-    void AnalyzeCode()
-    {
-        foreach (GameObject block in _codeBlocks)
-        {
-            Vector2 vec = new Vector2(0f, 0f);
-            if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.UP)
-            {
-                vec = new Vector2(0f, 1f);
-            } else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.DOWN)
-            {
-                vec = new Vector2(0f, -1f);
-            }
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.LEFT)
-            {
-                vec = new Vector2(-1f, 0f);
-            }
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.RIGHT)
-            {
-                vec = new Vector2(1f, 0f);
-            }
-            else if (block.GetComponent<MovementBlockController>()._data.blockIdentifier == MovementBlockIdentifier.WATERING)
-            {
-                vec = new Vector2(1f, 0f);
-            }
-            _runDirectives.Add(vec);
-        }
-    }
-
-    public void RunCodeArray()
-    {
-        GetAllBlock();
-        AnalyzeCode();
-    }
 }

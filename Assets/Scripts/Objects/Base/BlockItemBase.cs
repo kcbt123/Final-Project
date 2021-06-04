@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlockBase : MonoBehaviour
+public class BlockItemBase : MonoBehaviour
 {
-
     /** ======= MARK: - Fields and Properties ======= */
 
     /** 
@@ -15,7 +14,7 @@ public class BlockBase : MonoBehaviour
      *  - Code Item / Block type
      *  - Code Item / Block identifier
      */
-    public BlockJSONData _data;
+    public BlockData data;
 
     /** [Canvas] which the block is currently in */
     public Canvas canvas;
@@ -24,23 +23,23 @@ public class BlockBase : MonoBehaviour
     public CanvasGroup canvasGroup;
 
     /** ======= MARK: - MonoBehavior Functions ======= */
-
-    private void Awake()
+    public virtual void Awake()
     {
+        
     }
-
-    // Start is called before the first frame update
     public virtual void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    /** ======= MARK: - Action ======= */
+
+    public void OnDeleteBlock()
     {
-        
+        CustomEventSystem.instance.DispatchEvent(EventCode.ON_REMOVE_CODEBLOCK_MAIN, new object[] {
+            data.blockCurrentIndex,
+            data.blockType,
+            data.blockIdentifier
+        });
     }
-
-    /** ======= MARK: - Listeners ======= */
-
 }
