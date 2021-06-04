@@ -5,8 +5,39 @@ using DG.Tweening;
 
 public class Stage1GUIManager : MonoBehaviour
 {
+    public GameObject fullCanvas;
+
     public GameObject tutorialFullCanvas;
     public RectTransform tutorialContentPanel;
+
+    // ========== Singleton instance ==========
+    private static Stage1GUIManager _instance;
+    public static Stage1GUIManager instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+    private Stage1GUIManager()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
+
+
+    private void Awake()
+    {
+        //if (fullCanvas == null)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //    //fullCanvas = this;
+        //}
+        //else if (fullCanvas != this)
+        //{
+        //    Destroy(gameObject);
+        //}
+    }
 
     // Start is called before the first frame update
     void Start()

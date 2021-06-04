@@ -107,7 +107,7 @@ MonoBehaviour:
     blockType: 0
     blockIdentifier: 2
   canvas: {fileID: 0}
-  canvasGroup: {fileID: 0}
+  canvasGroup: {fileID: 4002068893228557078}
   iconMovUp: {fileID: 21300000, guid: fdde8dc04adbd41b3b71b41c33701010, type: 3}
   iconMovDown: {fileID: 21300000, guid: 8662f93ebce074dc189a9abe057bc8ba, type: 3}
   iconMovLeft: {fileID: 21300000, guid: 4a9024434a35849d8957d279e74a299f, type: 3}

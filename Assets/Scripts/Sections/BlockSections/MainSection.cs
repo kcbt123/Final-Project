@@ -59,7 +59,7 @@ public class MainSection : MonoBehaviour, IDropHandler
         // Debug.Log("Object type 3" + transform.GetChild(2).GetChild(0).GetChild(0).gameObject.name);
 
         //AddTestCodeBlocks();
-        //AddPlaceholderCodeBlocks();
+        AddPlaceholderCodeBlocks();
     }
 
     void AddTestCodeBlocks()
@@ -227,7 +227,7 @@ public class MainSection : MonoBehaviour, IDropHandler
         {
             GameObject obj = scrollPanelObject.transform.GetChild(i).gameObject;
             int trueIndex = obj.transform.GetSiblingIndex() + 1;
-            obj.GetComponent<MovementBlockController>().data.itemCurrentIndex = trueIndex;
+            obj.GetComponent<MovementBlockController>().data.blockCurrentIndex = trueIndex;
             obj.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = trueIndex.ToString();
         }
     }

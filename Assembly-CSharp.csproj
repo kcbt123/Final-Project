@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIEndStage.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUILevelSelect.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
+    <Compile Include="Assets\Scripts\GUI\MainStageCanvasController.cs" />
     <Compile Include="Assets\Scripts\GUI\RightSectionSwipeController.cs" />
     <Compile Include="Assets\Scripts\GUI\RunButtonController.cs" />
     <Compile Include="Assets\Scripts\GUI\Stage1GUIManager.cs" />
