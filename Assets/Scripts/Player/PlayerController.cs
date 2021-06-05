@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         GetAllBlock();
         StartCoroutine(AnalyzeCode());
         //Debug.Log("Move completed");
-        CheckIfStageComplete();
+        //StartCoroutine(CheckIfStageComplete());
         //StartCoroutine(MoveTest());
     }
 
@@ -280,15 +280,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        yield return StartCoroutine(CheckIfStageComplete());
     }
 
     /** ======= MARK: - Stage Complete ======= */
-    void CheckIfStageComplete()
+    IEnumerator CheckIfStageComplete()
     {
+        Debug.Log("XXXXXXXXXXXXXXXXXX CHECK STAGE COMPLETE");
         string timeSpent = "01:30";
         CustomEventSystem.instance.DispatchEvent(EventCode.ON_STAGE_FINISHED, new object[] {
             timeSpent
         });
+        yield return null;
     }
 
     /** ======= MARK: - Move Functions ======= */
