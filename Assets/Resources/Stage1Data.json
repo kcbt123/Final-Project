@@ -1,0 +1,8 @@
+{
+	"stageID": "1",
+	"itemData": [
+		"MOVEMENT_UP",
+		"MOVEMENT_RIGHT",
+		"ACTION_WATERING_YELLOW"
+	]
+}

@@ -71,12 +71,13 @@
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUILevelSelect.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIPanels\GUIMainMenu.cs" />
     <Compile Include="Assets\Scripts\GUI\MainStageCanvasController.cs" />
+    <Compile Include="Assets\Scripts\GUI\MainStageGUIManager.cs" />
     <Compile Include="Assets\Scripts\GUI\RightSectionSwipeController.cs" />
     <Compile Include="Assets\Scripts\GUI\RunButtonController.cs" />
-    <Compile Include="Assets\Scripts\GUI\Stage1GUIManager.cs" />
     <Compile Include="Assets\Scripts\Game Data\GameSetting.cs" />
     <Compile Include="Assets\Scripts\GridController.cs" />
     <Compile Include="Assets\Scripts\Manager\GameFlowManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\StageData.cs" />
     <Compile Include="Assets\Scripts\Objects\Base\BlockData.cs" />
     <Compile Include="Assets\Scripts\Objects\Base\BlockItemBase.cs" />
     <Compile Include="Assets\Scripts\Objects\Base\BlockItemType.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\Scripts\Utilities\EventManager\CustomEventSystem.cs" />
     <Compile Include="Assets\Scripts\Utilities\EventManager\EventCode.cs" />
     <Compile Include="Assets\Scripts\Utilities\EventManager\EventSystem.cs" />
+    <Compile Include="Assets\Scripts\Utilities\JSONUtil.cs" />
     <Compile Include="Assets\Scripts\Utilities\LogUtils.cs" />
     <Compile Include="Assets\Scripts\Utilities\PredicateUtil.cs" />
     <None Include="Assets\Fonts\TextMesh Pro\Shaders\TMPro.cginc" />

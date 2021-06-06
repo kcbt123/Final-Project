@@ -82,9 +82,6 @@ public class PlayerController : MonoBehaviour
     {
         GetAllBlock();
         StartCoroutine(AnalyzeCode());
-        //Debug.Log("Move completed");
-        //StartCoroutine(CheckIfStageComplete());
-        //StartCoroutine(MoveTest());
     }
 
     void GetAllBlock()

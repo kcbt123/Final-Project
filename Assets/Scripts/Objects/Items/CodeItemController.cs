@@ -45,7 +45,7 @@ public class CodeItemController : BlockItemBase, IPointerDownHandler, IBeginDrag
     public override void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        canvas = Stage1GUIManager.instance.fullCanvas.GetComponent<Canvas>();
+        canvas = MainStageGUIManager.instance.fullCanvas.GetComponent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         itemIcon = transform.GetComponent<Image>();
     }

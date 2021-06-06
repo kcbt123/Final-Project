@@ -525,6 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   codeItemPrefab: {fileID: 4002068893228557073, guid: c7e0a7f8277f02045b9709f978e5dbcf,
     type: 3}
+  stageDataIdents: 
 --- !u!1 &218541585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,7 +1842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &500681277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4340,7 +4341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1131996569
 RectTransform:
   m_ObjectHideFlags: 0

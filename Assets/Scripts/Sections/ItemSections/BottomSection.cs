@@ -16,12 +16,6 @@ public class BottomSection : MonoBehaviour
     [SerializeField]
     private GameObject codeItemPrefab;
 
-    BlockItemIdentifier[] idents = {
-            BlockItemIdentifier.MOVEMENT_UP,
-            BlockItemIdentifier.MOVEMENT_RIGHT,
-            BlockItemIdentifier.ACTION_WATERING_YELLOW,
-    };
-
     /** ======= MARK: - MonoBehaviour Methods ======= */
     void Awake()
     {
@@ -31,11 +25,13 @@ public class BottomSection : MonoBehaviour
 
     private void Start()
     {
+        LoadDataJSON();
         AddMockCodeItems();
     }
 
     void AddMockCodeItems()
     {
+        List<BlockItemIdentifier> bottomBlockList = stageDataIdents;
 
         for (int i = 0; i < 10; i++)
         {
@@ -47,30 +43,31 @@ public class BottomSection : MonoBehaviour
             newCodeItem.SetActive(false);
         }
 
-        for (int i = 0; i < idents.Length; i++)
+        for (int i = 0; i < bottomBlockList.Count; i++)
         {
             GameObject item = scrollPanelObject.transform.GetChild(i).gameObject;
             BlockData data = item.transform.GetComponent<CodeItemController>().data;
 
-            if (idents[i] == BlockItemIdentifier.MOVEMENT_UP
-                || idents[i] == BlockItemIdentifier.MOVEMENT_DOWN
-                || idents[i] == BlockItemIdentifier.MOVEMENT_LEFT
-                || idents[i] == BlockItemIdentifier.MOVEMENT_RIGHT)
+            if (bottomBlockList[i] == BlockItemIdentifier.MOVEMENT_UP
+                || bottomBlockList[i] == BlockItemIdentifier.MOVEMENT_DOWN
+                || bottomBlockList[i] == BlockItemIdentifier.MOVEMENT_LEFT
+                || bottomBlockList[i] == BlockItemIdentifier.MOVEMENT_RIGHT)
             {
                 data.blockType = BlockItemType.MOVEMENT;
             }
-            else if (idents[i] == BlockItemIdentifier.ACTION_WATERING_YELLOW
-              || idents[i] == BlockItemIdentifier.ACTION_WATERING_WHITE
-              || idents[i] == BlockItemIdentifier.ACTION_WATERING_RED)
+            else if (bottomBlockList[i] == BlockItemIdentifier.ACTION_WATERING_YELLOW
+              || bottomBlockList[i] == BlockItemIdentifier.ACTION_WATERING_WHITE
+              || bottomBlockList[i] == BlockItemIdentifier.ACTION_WATERING_RED)
             {
                 data.blockType = BlockItemType.ACTION;
-            } else if (idents[i] == BlockItemIdentifier.SPECIAL_FOR 
-                || idents[i] == BlockItemIdentifier.SPECIAL_IF)
+            }
+            else if (bottomBlockList[i] == BlockItemIdentifier.SPECIAL_FOR
+              || bottomBlockList[i] == BlockItemIdentifier.SPECIAL_IF)
             {
                 data.blockType = BlockItemType.SPECIAL;
             }
 
-            data.blockIdentifier = idents[i];
+            data.blockIdentifier = bottomBlockList[i];
             item.SetActive(true);
         }
     }
@@ -95,10 +92,11 @@ public class BottomSection : MonoBehaviour
 
     private void AddListeners()
     {
-        _eventListeners = new EventListener[3];
+        _eventListeners = new EventListener[4];
         _eventListeners[0] = CustomEventSystem.instance.AddListener(EventCode.ON_ADD_CODEBLOCK_MAIN, this, OnRemoveBottomCodeItem);
         _eventListeners[1] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_CODEBLOCK_MAIN, this, OnAddBottomCodeItem);
         _eventListeners[2] = CustomEventSystem.instance.AddListener(EventCode.ON_REMOVE_ALL_BLOCKS_MAIN, this, OnAddAllBottomItems);
+        //_eventListeners[3] = CustomEventSystem.instance.AddListener(EventCode.ON_LOAD_STAGE_DATA_DONE, this, OnLoadStageDataDone);
     }
 
     private void RemoveListeners()
@@ -186,6 +184,32 @@ public class BottomSection : MonoBehaviour
         for (int i = 0; i < _originalBlockCount; i++)
         {
             trans.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    // Temp = Load Data JSON
+
+    private StageData stageData;
+    public List<BlockItemIdentifier> stageDataIdents;
+
+    void LoadDataJSON()
+    {
+        stageData = JSONUtil.LoadDataFromJson<StageData>("Stage1Data");
+
+        for (int i = 0; i < stageData.itemData.Count; i++)
+        {
+            if (stageData.itemData[i] == "MOVEMENT_UP") { stageDataIdents.Add(BlockItemIdentifier.MOVEMENT_UP); }
+            else if (stageData.itemData[i] == "MOVEMENT_DOWN") { stageDataIdents.Add(BlockItemIdentifier.MOVEMENT_DOWN); }
+            else if (stageData.itemData[i] == "MOVEMENT_LEFT") { stageDataIdents.Add(BlockItemIdentifier.MOVEMENT_LEFT); }
+            else if (stageData.itemData[i] == "MOVEMENT_RIGHT") { stageDataIdents.Add(BlockItemIdentifier.MOVEMENT_RIGHT); }
+
+            else if (stageData.itemData[i] == "ACTION_WATERING_YELLOW") { stageDataIdents.Add(BlockItemIdentifier.ACTION_WATERING_YELLOW); }
+            else if (stageData.itemData[i] == "ACTION_WATERING_WHITE") { stageDataIdents.Add(BlockItemIdentifier.ACTION_WATERING_WHITE); }
+            else if (stageData.itemData[i] == "ACTION_WATERING_RED") { stageDataIdents.Add(BlockItemIdentifier.ACTION_WATERING_RED); }
+
+            else if (stageData.itemData[i] == "SPECIAL_FOR") { stageDataIdents.Add(BlockItemIdentifier.SPECIAL_FOR); }
+            else if (stageData.itemData[i] == "SPECIAL_IF") { stageDataIdents.Add(BlockItemIdentifier.SPECIAL_IF); }
+            else if (stageData.itemData[i] == "SPECIAL_FUNCTION") { stageDataIdents.Add(BlockItemIdentifier.SPECIAL_FUNCTION); }
         }
     }
 }
